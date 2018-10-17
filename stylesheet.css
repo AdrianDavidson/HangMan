@@ -1,0 +1,29 @@
+#kb{
+    margin: auto;
+    margin-top: 10%;
+    text-align: center;
+    width: 50%;
+    border: 1px solid green;
+    padding: 10px;
+    position: relative;
+}
+#dash{
+    margin-top: 20%;
+    margin: auto;
+    text-align: center;
+    width: 17%;
+}
+#Category{
+    margin-top: 20%;
+    margin: auto;
+    text-align: center;
+    width: 17%;
+}
+#pic{
+    margin: auto;
+    margin-top: 5%;
+    height: 250px;
+    width: 250px;
+    padding: 10px;
+    position: relative;
+}
