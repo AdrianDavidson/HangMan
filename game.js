@@ -33,10 +33,8 @@ function generateKeyBoard () {
     for (var i = 0; i < KeyBoard.length; i++) {
       document.getElementById("kb").innerHTML += "<button>" + KeyBoard[i] + "</button>";
       $("button").css({width: '55px',
-                         height: '50px',   
-                         'padding-top': '20px',
-                         'padding-bottom': '20px',
-                         'padding-right': '20px'});
+                        margin: '10px',
+                         height: '50px'});
 
       $(document).ready(function(){
         $("button").click(function () 
@@ -46,7 +44,23 @@ function generateKeyBoard () {
         });
      });
     }
-
+    $('button')
+    .on('mouseenter', function(){
+        var div = $(this);
+        div.stop(true, true).animate({ 
+            margin: -10,
+            width: "+=10",
+            height: "+=10"
+        }, 'fast');
+    })
+    .on('mouseleave', function(){
+        var div = $(this);
+        div.stop(true, true).animate({ 
+            margin: 10,
+            width: "-=10",
+            height: "-=10"
+        }, 'fast');
+    })
   }
   generateKeyBoard();
 
@@ -56,7 +70,7 @@ function getsCategory () {
   }
   getsCategory();
 
-// If categorie == array choose random word in array
+// If category == array choose random word in array
 function getWord(){
     if(randomCategorie == "Sport"){
         var randomSport = Sports[Math.floor(Math.random()*Sports.length)];
