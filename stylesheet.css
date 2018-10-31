@@ -27,3 +27,10 @@
     padding: 10px;
     position: relative;
 }
+#Category{
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 20px;
+}
+button{
+    background-color: pink;
+}

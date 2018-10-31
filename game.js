@@ -34,7 +34,8 @@ function generateKeyBoard () {
       document.getElementById("kb").innerHTML += "<button>" + KeyBoard[i] + "</button>";
       $("button").css({width: '55px',
                         margin: '10px',
-                         height: '50px'});
+                         height: '50px',
+                        color: 'green'});
 
       $(document).ready(function(){
         $("button").click(function () 
@@ -43,25 +44,34 @@ function generateKeyBoard () {
         $("input").val(text);
         });
      });
+     
     }
-    $('button')
-    .on('mouseenter', function(){
-        var div = $(this);
-        div.stop(true, true).animate({ 
-            margin: -10,
-            width: "+=10",
-            height: "+=10"
-        }, 'fast');
-    })
-    .on('mouseleave', function(){
-        var div = $(this);
-        div.stop(true, true).animate({ 
-            margin: 10,
-            width: "-=10",
-            height: "-=10"
-        }, 'fast');
-    })
+    $("button").mouseover(function(){
+        $(this).css("background-color", "yellow");
+    });
+    $("button").mouseout(function(){
+        $(this).css("background-color", "pink");
+    });
+
+    // $('button')
+    // .on('mouseenter', function(){
+    //     var div = $(this);
+    //     div.stop(true, true).animate({ 
+    //         margin: -10,
+    //         width: "+=10",
+    //         height: "+=10"
+    //     }, 'fast');
+    // })
+    // .on('mouseleave', function(){
+    //     var div = $(this);
+    //     div.stop(true, true).animate({ 
+    //         margin: 10,
+    //         width: "-=10",
+    //         height: "-=10"
+    //     }, 'fast');
+    // })
   }
+
   generateKeyBoard();
 
 function getsCategory () {
@@ -100,6 +110,7 @@ function displayImg(){
     $("#pic").html('<img src="./imgs/hangman-1.png" alt="Smiley face">');
 }
 displayImg();
+
 
 // Still to do
 // Load in all images 
