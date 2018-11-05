@@ -1,3 +1,5 @@
+// https://drive.google.com/drive/folders/0B4fAjHGILATeNm5pZHhpYnZhaEU
+
 // -----------------------------------------------------------------
 //                           My JQuery divs
 // -----------------------------------------------------------------
@@ -24,6 +26,9 @@ var Countries = ["Germany","Ireland","Egypt"];
 //                           My Variables
 // -----------------------------------------------------------------
 var randomCategorie;
+var randomSport;
+var randomSubject;
+var randomCountry;
 
 // -----------------------------------------------------------------
 //                           My Functions
@@ -42,6 +47,14 @@ function generateKeyBoard () {
         {
         var text = $(this).text();
         $("input").val(text);
+        console.log(text);
+        // if(randomSport.indexOf(text) || randomSubject.indexOf(text) || randomCountry.indexOf(text) != -1){
+        //     console.log(text + " found");
+        // }
+        if(randomSport.contains(text) - 1)
+        {
+            console.log("YAY");
+        }
         });
      });
      
@@ -83,21 +96,21 @@ function getsCategory () {
 // If category == array choose random word in array
 function getWord(){
     if(randomCategorie == "Sport"){
-        var randomSport = Sports[Math.floor(Math.random()*Sports.length)];
+        randomSport = Sports[Math.floor(Math.random()*Sports.length)];
         document.getElementById("words").innerHTML += randomSport;
         for(i = 0; i < randomSport.length; i++){
             document.getElementById("dash").innerHTML += " __ ";
         }
     }
     if(randomCategorie == "School Subject"){
-        var randomSubject = School_subjects[Math.floor(Math.random()*School_subjects.length)];
+        randomSubject = School_subjects[Math.floor(Math.random()*School_subjects.length)];
         document.getElementById("words").innerHTML += randomSubject;
         for(i = 0; i < randomSubject.length; i++){
             document.getElementById("dash").innerHTML += " __ ";
         }
     }
     if(randomCategorie == "Country"){
-        var randomCountry = Countries[Math.floor(Math.random()*Countries.length)];
+        randomCountry = Countries[Math.floor(Math.random()*Countries.length)];
         document.getElementById("words").innerHTML += randomCountry;
         for(i = 0; i < randomCountry.length; i++){
             document.getElementById("dash").innerHTML += " __ ";
