@@ -5,7 +5,14 @@
 // -----------------------------------------------------------------
 
 $('#parent').append(`<div id = "Category">Category: </div>
-                    <div id = "words">The random word is: </div>
+                    <div id = "words">
+                    <h1> Your score: <h1>
+                    <h3> Games you have Won:</h3>
+                    </br>
+                    <h3> Games you have Lost:</h3>
+                    </br>
+                    for me .. this is your word :  
+                    </div>
                     <div id = "dash"></div>
                     <div id = "pic"></div>`);
 
@@ -40,7 +47,7 @@ function generateKeyBoard () {
       $("button").css({width: '55px',
                         margin: '10px',
                          height: '50px',
-                        color: 'green'});
+                        color: 'black'});
 
       $(document).ready(function(){
         $("button").click(function () 
@@ -60,10 +67,10 @@ function generateKeyBoard () {
      
     }
     $("button").mouseover(function(){
-        $(this).css("background-color", "yellow");
+        $(this).css("background-color", "grey");
     });
     $("button").mouseout(function(){
-        $(this).css("background-color", "pink");
+        $(this).css("background-color", "lightblue");
     });
 
     // $('button')
@@ -123,6 +130,7 @@ function displayImg(){
     $("#pic").html('<img src="./imgs/hangman-1.png" alt="Smiley face">');
 }
 displayImg();
+
 
 
 // Still to do
