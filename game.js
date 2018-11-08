@@ -4,9 +4,7 @@
 //                           My JQuery divs
 // -----------------------------------------------------------------
 
-$('#parent').append(`
-                    <div id = "login"></div>
-                    <div id = "Category">Category: </div>
+$('#parent').append(`<div id = "Category">Category: </div>
                     <div id = "words">
                     <h1> Your score: <h1>
                     <h3> Games you have Won:</h3>
@@ -53,7 +51,7 @@ function loginscreen(){
     <input type="reset" value="Cancel"/>
     </form>`);
 }
-// loginscreen();
+ //loginscreen();
 
 function generateKeyBoard () {
     for (var i = 0; i < KeyBoard.length; i++) {
