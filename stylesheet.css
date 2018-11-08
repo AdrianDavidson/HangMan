@@ -1,6 +1,6 @@
- body {
+ html,body {
     	margin: 0;
-    	padding:0;
+        height: 100%;
      }
 
 #kb{
@@ -11,6 +11,9 @@
     /* border: 1px solid green; */
     padding: 10px;
     position: relative;
+}
+#logout{
+    background-color: brown;
 }
 #dash{
     margin-top: 20%;
@@ -27,12 +30,12 @@
     font-size: 20px;
 }
 #pic{
-    margin: auto;
+    margin-left: 42%;
     margin-top: 5%;
     height: 250px;
     width: 250px;
-    padding: 10px;
-    position: relative;
+    border-style: dotted;
+    overflow: hidden;
 }
 button{
     background-color: lightblue;

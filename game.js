@@ -4,7 +4,9 @@
 //                           My JQuery divs
 // -----------------------------------------------------------------
 
-$('#parent').append(`<div id = "Category">Category: </div>
+$('#parent').append(`
+                    <div id = "login"></div>
+                    <div id = "Category">Category: </div>
                     <div id = "words">
                     <h1> Your score: <h1>
                     <h3> Games you have Won:</h3>
@@ -14,7 +16,8 @@ $('#parent').append(`<div id = "Category">Category: </div>
                     for me .. this is your word :  
                     </div>
                     <div id = "dash"></div>
-                    <div id = "pic"></div>`);
+                    <div id = "pic"></div>
+                    <div id = "pic_container"></div>`);
 
 // -----------------------------------------------------------------
 //                           My Arrays
@@ -33,13 +36,24 @@ var Countries = ["Germany","Ireland","Egypt"];
 //                           My Variables
 // -----------------------------------------------------------------
 var randomCategorie;
-var randomSport;
-var randomSubject;
-var randomCountry;
+var randomword;
+// var randomSubject;
+// var randomCountry;
 
 // -----------------------------------------------------------------
 //                           My Functions
 // -----------------------------------------------------------------
+
+function loginscreen(){
+    $('#hiddencontent').hide();
+    $('#login').append(`<form name="login">
+    Username<input type="text" name="userid"/>
+    Password<input type="password" name="pswrd"/>
+    <input type="button" onclick="check(this.form)" value="Login"/>
+    <input type="reset" value="Cancel"/>
+    </form>`);
+}
+// loginscreen();
 
 function generateKeyBoard () {
     for (var i = 0; i < KeyBoard.length; i++) {
@@ -58,13 +72,8 @@ function generateKeyBoard () {
         // if(randomSport.indexOf(text) || randomSubject.indexOf(text) || randomCountry.indexOf(text) != -1){
         //     console.log(text + " found");
         // }
-        if(randomSport.contains(text) - 1)
-        {
-            console.log("YAY");
-        }
         });
      });
-     
     }
     $("button").mouseover(function(){
         $(this).css("background-color", "grey");
@@ -72,27 +81,9 @@ function generateKeyBoard () {
     $("button").mouseout(function(){
         $(this).css("background-color", "lightblue");
     });
-
-    // $('button')
-    // .on('mouseenter', function(){
-    //     var div = $(this);
-    //     div.stop(true, true).animate({ 
-    //         margin: -10,
-    //         width: "+=10",
-    //         height: "+=10"
-    //     }, 'fast');
-    // })
-    // .on('mouseleave', function(){
-    //     var div = $(this);
-    //     div.stop(true, true).animate({ 
-    //         margin: 10,
-    //         width: "-=10",
-    //         height: "-=10"
-    //     }, 'fast');
-    // })
   }
 
-  generateKeyBoard();
+generateKeyBoard();
 
 function getsCategory () {
     randomCategorie = Categories[Math.floor(Math.random()*Categories.length)];
@@ -102,24 +93,13 @@ function getsCategory () {
 
 // If category == array choose random word in array
 function getWord(){
-    if(randomCategorie == "Sport"){
-        randomSport = Sports[Math.floor(Math.random()*Sports.length)];
-        document.getElementById("words").innerHTML += randomSport;
-        for(i = 0; i < randomSport.length; i++){
-            document.getElementById("dash").innerHTML += " __ ";
-        }
-    }
-    if(randomCategorie == "School Subject"){
-        randomSubject = School_subjects[Math.floor(Math.random()*School_subjects.length)];
-        document.getElementById("words").innerHTML += randomSubject;
-        for(i = 0; i < randomSubject.length; i++){
-            document.getElementById("dash").innerHTML += " __ ";
-        }
-    }
-    if(randomCategorie == "Country"){
-        randomCountry = Countries[Math.floor(Math.random()*Countries.length)];
-        document.getElementById("words").innerHTML += randomCountry;
-        for(i = 0; i < randomCountry.length; i++){
+    if(randomCategorie == "Sport" && "School Subject" && "Country"){
+        randomword = Sports[Math.floor(Math.random()*Sports.length)];
+        randomword = School_subjects[Math.floor(Math.random()*School_subjects.length)];
+        randomword = Countries[Math.floor(Math.random()*Countries.length)];
+
+        document.getElementById("words").innerHTML += randomword;
+        for(i = 0; i < randomword.length; i++){
             document.getElementById("dash").innerHTML += " __ ";
         }
     }
@@ -127,9 +107,39 @@ function getWord(){
 getWord();
 
 function displayImg(){
-    $("#pic").html('<img src="./imgs/hangman-1.png" alt="Smiley face">');
+    $('#pic').prepend(`<img class="theImg" src="./imgs/hangman-0.png" style="width:250px; height:250px;"/>
+                        <img class="theImg" src="./imgs/hangman-1.png" style="width:250px; height:250px;"/>
+                        <img class="theImg" src="./imgs/hangman-2.png" style="width:250px; height:250px;" />
+                        <img class="theImg" src="./imgs/hangman-3.png" style="width:250px; height:250px;" />
+                        <img class="theImg" src="./imgs/hangman-4.png" style="width:250px; height:250px;" />
+                        <img class="theImg" src="./imgs/hangman-5.png" style="width:250px; height:250px;" />
+                        <img class="theImg" src="./imgs/hangman-6.png" style="width:250px; height:250px;" />
+                        <img class="theImg" src="./imgs/hangman-7.png" style="width:250px; height:250px;"/>
+                        <img class="theImg" src="./imgs/hangman-8.png" style="width:250px; height:250px;"/>
+                        <img class="theImg" src="./imgs/hangman-9.png" style="width:250px; height:250px;"/>`)
+
+                        // USE THIS TO MOVE ACCROS 250 px
+                        // $(document).ready(function(){
+//     $("button").click(function(){
+//         $("theIMG").animate({left: '250px'});
+//     });
+// });
+
 }
 displayImg();
+
+
+// for (var i = 0; i < randomword.length; i++) {
+//     alert(randomword.charAt(i));
+//     if(button != randomword.charAt(i))
+//     {
+//         // Move onto next picture
+//     }
+//     else{
+//         //Display button value instead of __
+//     } 
+//   }
+ 
 
 
 
