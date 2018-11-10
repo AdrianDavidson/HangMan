@@ -1,9 +1,8 @@
-// https://drive.google.com/drive/folders/0B4fAjHGILATeNm5pZHhpYnZhaEU
+// // https://drive.google.com/drive/folders/0B4fAjHGILATeNm5pZHhpYnZhaEU
 
-// -----------------------------------------------------------------
-//                           My JQuery divs
-// -----------------------------------------------------------------
-
+// // -----------------------------------------------------------------
+// //                           My JQuery divs
+// // -----------------------------------------------------------------
 $('#parent').append(`<div id = "Category">Category: </div>
                     <div id = "words">
                     <h1> Your score: <h1>
@@ -14,34 +13,70 @@ $('#parent').append(`<div id = "Category">Category: </div>
                     for me .. this is your word :  
                     </div>
                     <div id = "dash"></div>
+                     <div id="kb"></div>
                     <div id = "pic"></div>`);
-
 // -----------------------------------------------------------------
 //                           My Arrays
 // -----------------------------------------------------------------
-
 var KeyBoard = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
     "A", "S", "D", "F", "G", "H", "J", "K", "L",
     "Z", "X", "C", "V", "B", "N", "M"];
-
 var Categories = ["Sport", "School Subject", "Country"];
 var Sports = ["soccer", "rugby", "tennis"];
 var School_subjects = ["Art", "History", "Geography"];
 var Countries = ["Germany", "Ireland", "Egypt"];
-
 // -----------------------------------------------------------------
 //                           My Variables
 // -----------------------------------------------------------------
 var randomCategorie;
 var randomword;
 var text;
-// var randomSubject;
-// var randomCountry;
-
 // -----------------------------------------------------------------
-//                           My Functions
+//                           Log in & Sign in
 // -----------------------------------------------------------------
 
+// Log in 
+$('#LogIn_signIn').prepend(`<form id="register-form"> 
+                            <input id="name" type="text" placeholder="Name" value=""/>
+                            <input id="pw" type="password" placeholder="Password" value=""/>
+                            <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
+                            </form>
+
+                            <form id="login-form"> 
+                            <input id="userName" type="text" placeholder="Enter Username" value=""/>
+                            <input id="userPw" type="password" placeholder="Enter Password" value=""/>
+                            <input id="login_btn" type="submit" value="Login" onClick="check()"/>
+                            </form>`)
+// Name and Password from the register-form
+var nm = document.getElementById('name');
+var pw = document.getElementById('pw');
+// storing input from register-form
+function store() {
+    localStorage.setItem('name', nm.value);
+    localStorage.setItem('pw', pw.value);
+}
+// check if stored data from register-form is equal to entered data in the   login-form
+function check() {
+    // stored data from the register-form
+    var storedName = localStorage.getItem('name');
+    var storedPw = localStorage.getItem('pw');
+
+    // entered data from the login-form
+    var userName = document.getElementById('userName');
+    var userPw = document.getElementById('userPw');
+
+    // check if stored data from register-form is equal to data from login form
+    if(userName.value == storedName && userPw.value == storedPw) {
+       // alert('You are loged in.');
+            $("#LogIn_signIn").hide();
+            console.log("here");
+    }else {
+        alert('Username and password not valid. Please try again.');
+    }
+}
+// -----------------------------------------------------------------
+//                         Generates the keyboard
+// -----------------------------------------------------------------
 function generateKeyBoard() {
     for (var i = 0; i < KeyBoard.length; i++) {
         document.getElementById("kb").innerHTML += "<button onclick=letsee()>" + KeyBoard[i] + "</button>";
@@ -60,6 +95,10 @@ function generateKeyBoard() {
     });
 }
 generateKeyBoard();
+
+// -----------------------------------------------------------------
+//                      Generates a random word
+// -----------------------------------------------------------------
 
 function getsCategory() {
     randomCategorie = Categories[Math.floor(Math.random() * Categories.length)];
@@ -82,11 +121,14 @@ function getWord() {
     document.getElementById("words").innerHTML += randomword;
     for (i = 0; i < randomword.length; i++) {
         document.getElementById("dash").innerHTML += " __ ";
-        alert(randomword.charAt(i));
+        //alert(randomword.charAt(i));
     }
 }
 getWord();
 
+// -----------------------------------------------------------------
+//                           the images go here
+// -----------------------------------------------------------------
 function displayImg() {
     $('#pic').prepend(`<img class="theImg" src="./imgs/hangman-0.png" style="width:250px; height:250px;"/>
                         <img class="theImg" src="./imgs/hangman-1.png" style="width:250px; height:250px;"/>
@@ -121,11 +163,15 @@ function letsee() {
     });
 }
 
+// -----------------------------------------------------------------
+//                           TO DO
+// -----------------------------------------------------------------
 
-
-// Still to do
-// Load in all images 
-// Link if wrong letter make image appear
-// if correct no image appears
-// if all correct --> welldone
-// if all wrong --> game over
+// MAKE SURE LOG IN PAGE CAN BE HIDDEN
+// MAKE SURE MORE THAN ONE USER CAN BE STORED 
+// ADD GAME LOGIC
+    // if button guess wrong generate new image untill game over
+    // if correct display correct letter where __ is atm
+// IMPLEMENT GAME OVER 
+// KEEP TRACK OF SCORE 
+// ADD LOG OUT BUTTON
