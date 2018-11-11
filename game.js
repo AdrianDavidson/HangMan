@@ -3,17 +3,17 @@
 // // -----------------------------------------------------------------
 // //                           My JQuery divs
 // // -----------------------------------------------------------------
-$('#parent').append(`<div id = "Category">Category: </div>
-                    <div id = "words">
-                    <h1> Your score: <h1>
-                    <h3> Games you have Won:</h3>
-                    </br>
-                    <h3> Games you have Lost:</h3>
-                    </br>
-                    for me .. this is your word :  
+$('#parent').append(`<div id = "words">
+                        <div id = "welcome"> Welcome : </div>
+                        <h4> Your score: <h4>
+                        <div id="won"><h5> Games you have Won:</h5></div>
+                        </br>
+                        <div id="lost"><h5> Games you have lost:</h5></div>  
                     </div>
+                    <div id = "Category">Category: </div>
+                    
                     <div id = "dash"></div>
-                     <div id="kb"></div>
+                    <div id="kb"></div>
                     <div id = "pic"></div>`);
 // -----------------------------------------------------------------
 //                           My Arrays
@@ -36,44 +36,78 @@ var text;
 // -----------------------------------------------------------------
 
 // Log in 
-$('#LogIn_signIn').prepend(`<form id="register-form"> 
-                            <input id="name" type="text" placeholder="Name" value=""/>
-                            <input id="pw" type="password" placeholder="Password" value=""/>
-                            <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
-                            </form>
+// $('#container').prepend(`<div id = "LogIn_signIn">
+//                             <h1> Welcome to hangman </h1>
+//                             <h4> Login if you dare </h4>
 
-                            <form id="login-form"> 
-                            <input id="userName" type="text" placeholder="Enter Username" value=""/>
-                            <input id="userPw" type="password" placeholder="Enter Password" value=""/>
-                            <input id="login_btn" type="submit" value="Login" onClick="check()"/>
-                            </form>`)
-// Name and Password from the register-form
-var nm = document.getElementById('name');
-var pw = document.getElementById('pw');
-// storing input from register-form
-function store() {
-    localStorage.setItem('name', nm.value);
-    localStorage.setItem('pw', pw.value);
-}
-// check if stored data from register-form is equal to entered data in the   login-form
-function check() {
-    // stored data from the register-form
-    var storedName = localStorage.getItem('name');
-    var storedPw = localStorage.getItem('pw');
+//                             <form id="register-form"> 
+//                             <input id="name" type="text" placeholder="Name" value=""/>
+//                             <input id="pw" type="password" placeholder="Password" value=""/>
+//                             <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
+//                             </form>
 
-    // entered data from the login-form
-    var userName = document.getElementById('userName');
-    var userPw = document.getElementById('userPw');
+//                             <form id="login-form"> 
+//                             <input id="userName" type="text" placeholder="Enter Username" value=""/>
+//                             <input id="userPw" type="password" placeholder="Enter Password" value=""/>
+//                             <input id="login_btn" type="submit" value="Login"/>
+//                             </form>
+//                             </div>
+//                             <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
 
-    // check if stored data from register-form is equal to data from login form
-    if(userName.value == storedName && userPw.value == storedPw) {
-       // alert('You are loged in.');
-            $("#LogIn_signIn").hide();
-            console.log("here");
-    }else {
-        alert('Username and password not valid. Please try again.');
-    }
-}
+// $("#container").css({
+//     "backgroundColor": "white",
+//     "width": "100%",
+//     "height": "100%",
+//     "position":"absolute",
+//     "display": "inline-block",
+//     "text-align": "center"});
+
+//     $("#loginimage").css({
+//         "margin-left": "65%",
+//         "margin-top": "25%",});
+
+//     $("#LogIn_signIn").css({
+//     "left": "50%",
+//     "top": "30%",
+//     "position": "absolute",
+//     "-webkit-transform": "translate3d(-50%, -50%, 0)",
+//     "-moz-transform": "translate3d(-50%, -50%, 0)",
+//     "font-family": "'Roboto Slab', serif",
+//     "font-size": "30px",
+//     "transform": "translate3d(-50%, -50%, 0)"})
+
+// // Name and Password from the register-form
+// var nm = document.getElementById('name');
+// var pw = document.getElementById('pw');
+// // storing input from register-form
+// function store() {
+//     sessionStorage.setItem('name', nm.value);  //can use localstorage too
+//     sessionStorage.setItem('pw', pw.value);
+// }
+
+// $(function () {
+//     $('#login_btn').click(function (e) {
+//         e.preventDefault();
+//         var storedName = sessionStorage.getItem('name');
+//         var storedPw = sessionStorage.getItem('pw');
+
+//         // entered data from the login-form
+//         var userName = document.getElementById('userName');
+//         var userPw = document.getElementById('userPw');
+
+//         // check if stored data from register-form is equal to data from login form
+//         if (userName.value == storedName && userPw.value == storedPw) {
+//             alert('You are loged in.');
+//             // $("#LogIn_signIn").hide();
+//             $("#container").fadeOut(1000);
+//             console.log("here");
+//         } else {
+//             alert('Username and password not valid. Please try again.');
+//         }
+//         document.getElementById("welcome").innerHTML += storedName;
+//     });
+// });
+
 // -----------------------------------------------------------------
 //                         Generates the keyboard
 // -----------------------------------------------------------------
@@ -88,10 +122,15 @@ function generateKeyBoard() {
         });
     }
     $("button").mouseover(function () {
-        $(this).css("background-color", "grey");
+        $(this).css({"background-color": "orangered",
+                    "width": "65px",
+                    "height": "60px"});
     });
+
     $("button").mouseout(function () {
-        $(this).css("background-color", "lightblue");
+        $(this).css({"background-color": "grey",
+        "width": "55px",
+        "height": "50px"});
     });
 }
 generateKeyBoard();
@@ -148,9 +187,9 @@ function letsee() {
         $("button").click(function () {
             text = $(this).text();
             $("input").val(text);
-    
-            console.log("Letter clicked = "+text);
-            
+
+            console.log("Letter clicked = " + text);
+
             // for(var i = 0;i < randomword.length; i++){
             //     if(randomword.length != charAt(i)){
             //         console.log("no");

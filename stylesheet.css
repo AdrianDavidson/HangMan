@@ -7,67 +7,62 @@
     position:absolute;
     width: 100%;
     height: 100%;
-    background-color: yellow;
 }
-
-#LogIn_signIn {
-    position:absolute;
-    width: 20%;
-    height: 20%;
-    background-color: green;
-}
-
 #kb{
     margin: auto;
     margin-top: 5%;
     text-align: center;
     width: 50%;
-    /* border: 1px solid green; */
     padding: 10px;
     position: relative;
 }
-#logout{
-    background-color: brown;
-}
 #dash{
-    margin-top: 20%;
+    margin-top: 30%;
     margin: auto;
     text-align: center;
     width: 17%;
 }
 #Category{
-    margin-top: 20%;
+    margin-top: 25%;
     margin: auto;
     text-align: center;
     width: 17%;
-    font-family: 'Gloria Hallelujah', cursive;
+    font-family: 'Roboto Slab', serif;
     font-size: 20px;
 }
 #pic{
+    margin-top: 2%;
     margin-left: 42%;
-    margin-top: 5%;
     height: 250px;
     width: 250px;
     overflow: hidden;
 }
 button{
-    background-color: lightblue;
+    background-color: grey;
+    border: solid orangered 1px;
 }
 #words{
     margin-top: 0%;
     margin-left: 0%;
     padding:0px;
     width: 20%;
-    height: 80%;
-    position: fixed;
-    background-color:rgba(192,192,192,0.2);
-    border-style: dotted;
+    height: 100%;
+    position: absolute;
+    background-color:rgba(0,0,0,0.8);
+    color: orangered;
+}
+#won{
+    margin-top: 45%;
+}
+#lost{
+    margin-top: 70%;
 }
 #btn{
     margin-top: 20%;
     margin: auto;
     text-align: center;
-    width: 17%;
+    width: 15%;
+    height: 30%;
     font-family: 'Gloria Hallelujah', cursive;
     font-size: 20px;
 }
