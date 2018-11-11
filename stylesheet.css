@@ -30,6 +30,11 @@
     font-family: 'Roboto Slab', serif;
     font-size: 20px;
 }
+#logout{
+    margin-left: 90%;
+    margin-top: 5%;
+    position: relative;
+}
 #pic{
     margin-top: 2%;
     margin-left: 42%;
@@ -50,12 +55,15 @@ button{
     position: absolute;
     background-color:rgba(0,0,0,0.8);
     color: orangered;
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+
 }
 #won{
     margin-top: 45%;
 }
 #lost{
-    margin-top: 70%;
+    margin-top: 60%;
 }
 #btn{
     margin-top: 20%;

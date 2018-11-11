@@ -124,13 +124,15 @@ function generateKeyBoard() {
     $("button").mouseover(function () {
         $(this).css({"background-color": "orangered",
                     "width": "65px",
-                    "height": "60px"});
+                    "height": "60px",
+                    "border-radius": "100px"});
     });
 
     $("button").mouseout(function () {
         $(this).css({"background-color": "grey",
         "width": "55px",
-        "height": "50px"});
+        "height": "50px",
+        "border-radius": "0px"});
     });
 }
 generateKeyBoard();
@@ -182,19 +184,26 @@ function displayImg() {
 }
 displayImg();
 
+//game functionality
 function letsee() {
+    var wrong_letters;
+    var correct_letters;
+
     $(document).ready(function () {
         $("button").click(function () {
             text = $(this).text();
-            $("input").val(text);
-
             console.log("Letter clicked = " + text);
 
-            // for(var i = 0;i < randomword.length; i++){
-            //     if(randomword.length != charAt(i)){
-            //         console.log("no");
-            //     }
-            // }
+            for(var i = 0;i < randomword.length; i++){
+                for(var x =0; x < KeyBoard.length;x++){
+                    if(text != randomword[i]){
+                        console.log("there is NO match");
+                    }
+                    else{
+                        console.log("There IS a match")
+                    }
+                }
+             }
             // if(text == randomword.charAt(i)){
             //     console.log("yay");
             // }
@@ -206,7 +215,6 @@ function letsee() {
 //                           TO DO
 // -----------------------------------------------------------------
 
-// MAKE SURE LOG IN PAGE CAN BE HIDDEN
 // MAKE SURE MORE THAN ONE USER CAN BE STORED 
 // ADD GAME LOGIC
     // if button guess wrong generate new image untill game over
