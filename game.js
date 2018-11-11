@@ -35,78 +35,83 @@ var text;
 //                           Log in & Sign in
 // -----------------------------------------------------------------
 
-// Log in 
-// $('#container').prepend(`<div id = "LogIn_signIn">
-//                             <h1> Welcome to hangman </h1>
-//                             <h4> Login if you dare </h4>
+// +++++++++++++++++++ Log in & Signup form +++++++++++++++++++
 
-//                             <form id="register-form"> 
-//                             <input id="name" type="text" placeholder="Name" value=""/>
-//                             <input id="pw" type="password" placeholder="Password" value=""/>
-//                             <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
-//                             </form>
+$('#container').prepend(`<div id = "LogIn_signIn">
+                            <h1> Welcome to hangman </h1>
+                            <h4> Login if you dare </h4>
 
-//                             <form id="login-form"> 
-//                             <input id="userName" type="text" placeholder="Enter Username" value=""/>
-//                             <input id="userPw" type="password" placeholder="Enter Password" value=""/>
-//                             <input id="login_btn" type="submit" value="Login"/>
-//                             </form>
-//                             </div>
-//                             <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
+                            <form id="register-form"> 
+                            <input id="name" type="text" placeholder="Name" value=""/>
+                            <input id="pw" type="password" placeholder="Password" value=""/>
+                            <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
+                            </form>
 
-// $("#container").css({
-//     "backgroundColor": "white",
-//     "width": "100%",
-//     "height": "100%",
-//     "position":"absolute",
-//     "display": "inline-block",
-//     "text-align": "center"});
+                            <form id="login-form"> 
+                            <input id="userName" type="text" placeholder="Enter Username" value=""/>
+                            <input id="userPw" type="password" placeholder="Enter Password" value=""/>
+                            <input id="login_btn" type="submit" value="Login"/>
+                            </form>
+                            </div>
+                            <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
 
-//     $("#loginimage").css({
-//         "margin-left": "65%",
-//         "margin-top": "25%",});
+// +++++++++++++++++++ added css using jquery +++++++++++++++++++
 
-//     $("#LogIn_signIn").css({
-//     "left": "50%",
-//     "top": "30%",
-//     "position": "absolute",
-//     "-webkit-transform": "translate3d(-50%, -50%, 0)",
-//     "-moz-transform": "translate3d(-50%, -50%, 0)",
-//     "font-family": "'Roboto Slab', serif",
-//     "font-size": "30px",
-//     "transform": "translate3d(-50%, -50%, 0)"})
+$("#container").css({
+    "backgroundColor": "white",
+    "width": "100%",
+    "height": "100%",
+    "position":"absolute",
+    "display": "inline-block",
+    "text-align": "center"});
 
-// // Name and Password from the register-form
-// var nm = document.getElementById('name');
-// var pw = document.getElementById('pw');
-// // storing input from register-form
-// function store() {
-//     sessionStorage.setItem('name', nm.value);  //can use localstorage too
-//     sessionStorage.setItem('pw', pw.value);
-// }
+    $("#loginimage").css({
+        "margin-left": "65%",
+        "margin-top": "25%",});
 
-// $(function () {
-//     $('#login_btn').click(function (e) {
-//         e.preventDefault();
-//         var storedName = sessionStorage.getItem('name');
-//         var storedPw = sessionStorage.getItem('pw');
+    $("#LogIn_signIn").css({
+    "left": "50%",
+    "top": "30%",
+    "position": "absolute",
+    "-webkit-transform": "translate3d(-50%, -50%, 0)",
+    "-moz-transform": "translate3d(-50%, -50%, 0)",
+    "font-family": "'Roboto Slab', serif",
+    "font-size": "30px",
+    "transform": "translate3d(-50%, -50%, 0)"})
 
-//         // entered data from the login-form
-//         var userName = document.getElementById('userName');
-//         var userPw = document.getElementById('userPw');
+// +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
 
-//         // check if stored data from register-form is equal to data from login form
-//         if (userName.value == storedName && userPw.value == storedPw) {
-//             alert('You are loged in.');
-//             // $("#LogIn_signIn").hide();
-//             $("#container").fadeOut(1000);
-//             console.log("here");
-//         } else {
-//             alert('Username and password not valid. Please try again.');
-//         }
-//         document.getElementById("welcome").innerHTML += storedName;
-//     });
-// });
+// Name and Password from the register-form
+var nm = document.getElementById('name');
+var pw = document.getElementById('pw');
+// storing input from register-form
+function store() {
+    sessionStorage.setItem('name', nm.value);  //can use localstorage too
+    sessionStorage.setItem('pw', pw.value);
+}
+
+$(function () {
+    $('#login_btn').click(function (e) {
+        e.preventDefault();
+        var storedName = sessionStorage.getItem('name');
+        var storedPw = sessionStorage.getItem('pw');
+
+        // entered data from the login-form
+        var userName = document.getElementById('userName');
+        var userPw = document.getElementById('userPw');
+
+        // check if stored data from register-form is equal to data from login form
+        if (userName.value == storedName && userPw.value == storedPw) {
+            alert('You are loged in.');
+            // $("#LogIn_signIn").hide();
+            $("#container").fadeOut(1000);
+            console.log("here");
+        } else {
+            alert('Username and password not valid. Please try again.');
+        }
+        document.getElementById("welcome").innerHTML += storedName;
+    });
+});
 
 // -----------------------------------------------------------------
 //                         Generates the keyboard
@@ -185,6 +190,9 @@ function displayImg() {
 displayImg();
 
 //game functionality
+
+// Prints button clickee but keeps adding one each time..
+// prints no all the time even if match
 function letsee() {
     var wrong_letters;
     var correct_letters;
