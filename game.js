@@ -203,29 +203,34 @@ displayImg();
 // Prints button clicked but keeps adding one each time..
 // prints no all the time even if match
 function letsee() {
-    var wrong_letters;
-    var correct_letters;
+    // var wrong_letters;
+    // var correct_letters;
 
-    $(document).ready(function () {
-        $("button").click(function () {
-            text = $(this).text();
-            console.log("Letter clicked = " + text);
+    // $(document).ready(function () {
+    //     $("button").click(function () {
+    //         text = $(this).text();
+    //         console.log("Letter clicked = " + text);
 
-            for(var i = 0;i < randomword.length; i++){
-                for(var x =0; x < KeyBoard.length;x++){
-                    if(text != randomword[i]){
-                        console.log("there is NO match");
-                    }
-                    else{
-                        console.log("There IS a match")
-                    }
-                }
-             }
-            // if(text == randomword.charAt(i)){
-            //     console.log("yay");
-            // }
-        });
-    });
+    //         for(var i = 0;i < randomword.length; i++){
+    //             for(var x =0; x < KeyBoard.length;x++){
+    //                 if(text != randomword[i]){
+    //                     console.log("there is NO match");
+    //                 }
+    //                 else{
+    //                     console.log("There IS a match")
+    //                 }
+    //             }
+    //          }
+    //         // if(text == randomword.charAt(i)){
+    //         //     console.log("yay");
+    //         // }
+    //     });
+    // });
+
+    // $("button").click(function(){
+    //     var switcher = $('#word [letter = ' + $(this).text() + ']').each(function(){
+    //       $(this).text($(this).attr('letter'));
+    //     }).length;
 }
 
 // -----------------------------------------------------------------
