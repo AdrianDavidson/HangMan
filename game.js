@@ -1,5 +1,3 @@
-// // https://drive.google.com/drive/folders/0B4fAjHGILATeNm5pZHhpYnZhaEU
-
 // // -----------------------------------------------------------------
 // //                           My JQuery divs
 // // -----------------------------------------------------------------
@@ -15,23 +13,8 @@ $('#parent').append(`<div id = "words">
                     <div id = "dash"></div>
                     <div id="kb"></div>
                     <div id = "pic"></div>`);
-// -----------------------------------------------------------------
-//                           My Arrays
-// -----------------------------------------------------------------
-var KeyBoard = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
-    "A", "S", "D", "F", "G", "H", "J", "K", "L",
-    "Z", "X", "C", "V", "B", "N", "M"];
-    
-var Categories = ["Sport", "School Subject", "Country"];
-var Sports = ["soccer", "rugby", "tennis"];
-var School_subjects = ["Art", "History", "Geography"];
-var Countries = ["Germany", "Ireland", "Egypt"];
-// -----------------------------------------------------------------
-//                           My Variables
-// -----------------------------------------------------------------
-var randomCategorie;
-var randomword;
-var text;
+
+startGame();
 // -----------------------------------------------------------------
 //                           Log in & Sign in
 // -----------------------------------------------------------------
@@ -113,12 +96,34 @@ var text;
 //     });
 // });
 
+var win = 0;
+var loose = 0;
+
+function startGame() {
+
+// -----------------------------------------------------------------
+//                           My Arrays
+// -----------------------------------------------------------------
+var KeyBoard = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+    "A", "S", "D", "F", "G", "H", "J", "K", "L",
+    "Z", "X", "C", "V", "B", "N", "M"];
+    
+var Categories = ["Sport", "School Subject", "Country"];
+var Sports = ["soccer", "rugby", "tennis"];
+var School_subjects = ["Art", "History", "Geography"];
+var Countries = ["Germany", "Ireland", "Egypt"];
+// -----------------------------------------------------------------
+//                           My Variables
+// -----------------------------------------------------------------
+var randomCategorie;
+var randomword;
+//var text;
+
 // -----------------------------------------------------------------
 //                         Generates the keyboard
 // -----------------------------------------------------------------
-function generateKeyBoard() {
     for (var i = 0; i < KeyBoard.length; i++) {
-        document.getElementById("kb").innerHTML += "<button onclick=letsee()>" + KeyBoard[i] + "</button>";
+        document.getElementById("kb").innerHTML += "<button>" + KeyBoard[i] + "</button>";
         $("button").css({
             width: '55px',
             margin: '10px',
@@ -141,29 +146,15 @@ function generateKeyBoard() {
         "border-radius": "0px"});
         
     });
-    // Hover function gives a slower animation but it acts weird
-    // $("button").hover(function(){
-    //     $(this).animate({ width: "65px",
-    //                         height: "60px", });
-    // }, function() {
-    //     $(this).animate({ width: "55px",
-    //                          height: "50px", });
-    // });
-}
-generateKeyBoard();
 
 // -----------------------------------------------------------------
 //                      Generates a random word
 // -----------------------------------------------------------------
 
-function getsCategory() {
     randomCategorie = Categories[Math.floor(Math.random() * Categories.length)];
     document.getElementById("Category").innerHTML += randomCategorie;
-}
-getsCategory();
 
-// If category == array choose random word in array
-function getWord() {
+    //randomword
     if (randomCategorie == "Sport") {
         randomword = Sports[Math.floor(Math.random() * Sports.length)];
     }
@@ -178,60 +169,53 @@ function getWord() {
     for (i = 0; i < randomword.length; i++) {
         document.getElementById("dash").innerHTML += " __ ";
     }
-}
-getWord();
 
+    var score = 0;
 // -----------------------------------------------------------------
-//                           the images go here
+//                      Game Logic
 // -----------------------------------------------------------------
-function displayImg() {
-    $('#pic').prepend(`<img class="theImg" src="./imgs/hangman-0.png" style="width:250px; height:250px;"/>
-                        <img class="theImg" src="./imgs/hangman-1.png" style="width:250px; height:250px;"/>
-                        <img class="theImg" src="./imgs/hangman-2.png" style="width:250px; height:250px;" />
-                        <img class="theImg" src="./imgs/hangman-3.png" style="width:250px; height:250px;" />
-                        <img class="theImg" src="./imgs/hangman-4.png" style="width:250px; height:250px;" />
-                        <img class="theImg" src="./imgs/hangman-5.png" style="width:250px; height:250px;" />
-                        <img class="theImg" src="./imgs/hangman-6.png" style="width:250px; height:250px;" />
-                        <img class="theImg" src="./imgs/hangman-7.png" style="width:250px; height:250px;"/>
-                        <img class="theImg" src="./imgs/hangman-8.png" style="width:250px; height:250px;"/>
-                        <img class="theImg" src="./imgs/hangman-9.png" style="width:250px; height:250px;"/>`)
-}
-displayImg();
+    $.each(randomword.split(''), function(i, char){
+        $('#answer').append($('<span class="letter" letter="' + char +'"></span>'));
+        $('.letter').css("font-size", "40px", "font-weight", "900");
+      });
 
-//game functionality
-
-// Prints button clicked but keeps adding one each time..
-// prints no all the time even if match
-function letsee() {
-    // var wrong_letters;
-    // var correct_letters;
-
-    // $(document).ready(function () {
-    //     $("button").click(function () {
-    //         text = $(this).text();
-    //         console.log("Letter clicked = " + text);
-
-    //         for(var i = 0;i < randomword.length; i++){
-    //             for(var x =0; x < KeyBoard.length;x++){
-    //                 if(text != randomword[i]){
-    //                     console.log("there is NO match");
-    //                 }
-    //                 else{
-    //                     console.log("There IS a match")
-    //                 }
-    //             }
-    //          }
-    //         // if(text == randomword.charAt(i)){
-    //         //     console.log("yay");
-    //         // }
-    //     });
-    // });
-
-    // $("button").click(function(){
-    //     var switcher = $('#word [letter = ' + $(this).text() + ']').each(function(){
-    //       $(this).text($(this).attr('letter'));
-    //     }).length;
-}
+                $('button').click(function(){
+                var switcher = $('#answer [letter = ' + $(this).text() + ']').each(function(){
+                  $(this).text($(this).attr('letter'));
+                  console.log("letter = "+ letterLeft);
+                //   $(this).css({"background-color": "green"});
+                }).length;
+          
+                $(this).removeClass('button').unbind('click');
+                if (switcher > 0 ){
+                  $(this).addClass("Y");
+                  var letterLeft = $(".letter:empty").length;
+                  console.log("letter Left " + letterLeft);
+                  if (letterLeft <= 0){
+                    //checkResult();
+                    console.log("WINNER")
+                    win += 1;
+                    // $('#win').text("Win: " + win);
+                    // console.log("score " + score);
+                  }
+                }
+                else{
+                  $(this).addClass("X");
+                  score += 1;
+                  console.log("score " + score);
+                  var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
+                  $('#pic').children("img").hide();
+                  $('#pic').append(myImg);
+                  if (score >= 10){
+                      console.log("LOOSER");
+                    // gameLoose();
+                    // $('#answer').text("Word was: " + randomWord);
+                    loose += 1;
+                    //$('#loose').text("Loose: " + loose);
+                  }
+                }
+              });
+            }
 
 // -----------------------------------------------------------------
 //                           TO DO
