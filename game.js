@@ -141,20 +141,16 @@ function startGame() {
     }
     $("button").mouseover(function () {
         $(this).css({
-            "background-color": "orangered",
-            "width": "65px",
-            "height": "60px",
-            "border-radius": "200%"
+            "background-color": "rgba(255,69,0,0.5)",
+            "font-size" : "20px"
         });
 
     });
 
     $("button").mouseout(function () {
         $(this).css({
-            "background-color": "grey",
-            "width": "55px",
-            "height": "50px",
-            "border-radius": "0px"
+            "background-color": "white",
+            "font-size" : "10px"
         });
 
     });
@@ -186,43 +182,63 @@ function startGame() {
     // -----------------------------------------------------------------
     //                      Game Logic
     // -----------------------------------------------------------------
-    $.each(randomword.split(''), function (_i, char) {
-        $('#answer').append($('<span class="letter" letter="' + char + '"></span>'));
-        $('.letter').css("font-size", "40px", "font-weight", "900");
-    });
 
-    $('button').click(function () {
-        var charCount = $('#answer [letter = ' + $(this).text() + ']').each(function () {
-            $(this).text($(this).attr('letter'));
-        }).length;
+    var currentword = randomword.split('');
 
-        // REMEMBER:
-        // REPLACE DASH WITH ACTUAL CORRECT WORD
-        $(this).removeClass('button').unbind('click');
-        if (charCount > 0) {
-            $(this).addClass("Y");
-            var letterLeft = $(".letter:empty").length;
-            console.log("Correct letter was chosen");
-            console.log("letter Left " + letterLeft);
-            if (letterLeft <= 0) {
-                console.log("WINNER")
-                win += 1;
-            }
-        }
-        else {
-            $(this).addClass("X");
-            score += 1;
-            console.log("score " + score);
-            var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
-            $('#pic').children("img").hide();
-            $('#pic').append(myImg);
-            if (score >= 10) {
-                console.log("LOOSER");
-                // $('#answer').text("Word was: " + randomWord);
-                loose += 1;
-            }
-        }
-    });
+    $.each(currentword, function(index, value) { 
+        //alert(index + ': ' + value);
+      });
+
+      $('button').click(function () {
+            var charCount = $('#answer [letter = ' + $(this).text() + ']').each(function () {
+                $(this).text($(this).attr('letter'));
+            }).length;
+
+            $(this).removeClass('button').unbind('click');
+
+            if(currentword == charCount){
+                alert("YAY");
+              }
+        });
+      
+
+    // $.each(randomword.split(''), function (_i, char) {
+    //     $('#answer').append($('<span class="letter" letter="' + char + '"></span>'));
+    //     $('.letter').css("font-size", "40px", "font-weight", "900");
+    // });
+
+    // $('button').click(function () {
+    //     var charCount = $('#answer [letter = ' + $(this).text() + ']').each(function () {
+    //         $(this).text($(this).attr('letter'));
+    //     }).length;
+
+    //     // REMEMBER:
+    //     // REPLACE DASH WITH ACTUAL CORRECT WORD
+    //     $(this).removeClass('button').unbind('click');
+    //     if (charCount > 0) {
+    //         $(this).addClass("Y");
+    //         var letterLeft = $(".letter:empty").length;
+    //         console.log("Correct letter was chosen");
+    //         console.log("letter Left " + letterLeft);
+    //         if (letterLeft <= 0) {
+    //             console.log("WINNER")
+    //             win += 1;
+    //         }
+    //     }
+    //     else {
+    //         $(this).addClass("X");
+    //         score += 1;
+    //         console.log("score " + score);
+    //         var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
+    //         $('#pic').children("img").hide();
+    //         $('#pic').append(myImg);
+    //         if (score >= 10) {
+    //             console.log("LOOSER");
+    //             // $('#answer').text("Word was: " + randomWord);
+    //             loose += 1;
+    //         }
+    //     }
+    // });
 }
 
 
