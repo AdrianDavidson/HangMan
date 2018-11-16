@@ -3,7 +3,6 @@
 // // -----------------------------------------------------------------
 $('#parent').append(`<div id = "words">
                         <div id = "welcome"> Welcome : </div>
-                        <h4> Your score: <h4>
                         <div id="won"><h5> Games you have Won:</h5></div>
                         </br>
                         <div id="lost"><h5> Games you have lost:</h5></div>  
@@ -79,9 +78,7 @@ startGame();
 
 // pwarray.push('pw', pw.value); //Add the text 'item1' to nameArr
 // localStorage.setItem('pws', JSON.stringify(pwarray));
-
 // }
-
 // $(function () {
 //     $('#login_btn').click(function (e) {
 //         e.preventDefault();
@@ -199,11 +196,13 @@ function startGame() {
             $(this).text($(this).attr('letter'));
         }).length;
 
+        // REMEMBER:
+        // REPLACE DASH WITH ACTUAL CORRECT WORD
         $(this).removeClass('button').unbind('click');
         if (charCount > 0) {
             $(this).addClass("Y");
             var letterLeft = $(".letter:empty").length;
-            console.log("Correct letter");
+            console.log("Correct letter was chosen");
             console.log("letter Left " + letterLeft);
             if (letterLeft <= 0) {
                 console.log("WINNER")
