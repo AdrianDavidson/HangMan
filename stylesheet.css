@@ -2,7 +2,6 @@
     	margin: 0;
         height: 100%;
      }
-
 #parent{
     position:absolute;
     width: 100%;
@@ -57,7 +56,6 @@ button{
     color: orangered;
     font-family: 'Roboto Slab', serif;
     font-size: 20px;
-
 }
 #won{
     margin-top: 45%;

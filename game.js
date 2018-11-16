@@ -68,21 +68,32 @@ startGame();
 // // Name and Password from the register-form
 // var nm = document.getElementById('name');
 // var pw = document.getElementById('pw');
+// var namesArr = [];
+// var pwarray =[];
 // // storing input from register-form
 // function store() {
-//     sessionStorage.setItem('name', nm.value);  //can use localstorage too
-//     sessionStorage.setItem('pw', pw.value);
+//     // localStorage.setItem('name', nm.value);  //can use localstorage too
+//     // localStorage.setItem('pw', pw.value);  
+// namesArr.push('name', nm.value); //Add the text 'item1' to nameArr
+// localStorage.setItem('names', JSON.stringify(namesArr)); 
+
+// pwarray.push('pw', pw.value); //Add the text 'item1' to nameArr
+// localStorage.setItem('pws', JSON.stringify(pwarray));
+
 // }
 
 // $(function () {
 //     $('#login_btn').click(function (e) {
 //         e.preventDefault();
-//         var storedName = sessionStorage.getItem('name');
-//         var storedPw = sessionStorage.getItem('pw');
+//         var storedName = JSON.parse(localStorage.getItem("names"));  
+//         var storedPw = JSON.parse(localStorage.getItem("pws"));  
+//         // var storedName = sessionStorage.getItem('name');
+//         // var storedPw = sessionStorage.getItem('pw');
 
 //         // entered data from the login-form
 //         var userName = document.getElementById('userName');
 //         var userPw = document.getElementById('userPw');
+//         // console.log(names);
 
 //         // check if stored data from register-form is equal to data from login form
 //         if (userName.value == storedName && userPw.value == storedPw) {
@@ -101,27 +112,27 @@ var loose = 0;
 
 function startGame() {
 
-// -----------------------------------------------------------------
-//                           My Arrays
-// -----------------------------------------------------------------
-var KeyBoard = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
-    "A", "S", "D", "F", "G", "H", "J", "K", "L",
-    "Z", "X", "C", "V", "B", "N", "M"];
-    
-var Categories = ["Sport", "School Subject", "Country"];
-var Sports = ["soccer", "rugby", "tennis"];
-var School_subjects = ["Art", "History", "Geography"];
-var Countries = ["Germany", "Ireland", "Egypt"];
-// -----------------------------------------------------------------
-//                           My Variables
-// -----------------------------------------------------------------
-var randomCategorie;
-var randomword;
-//var text;
+    // -----------------------------------------------------------------
+    //                           My Arrays
+    // -----------------------------------------------------------------
+    var KeyBoard = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+        "A", "S", "D", "F", "G", "H", "J", "K", "L",
+        "Z", "X", "C", "V", "B", "N", "M"];
 
-// -----------------------------------------------------------------
-//                         Generates the keyboard
-// -----------------------------------------------------------------
+    var Categories = ["Sport", "School Subject", "Country"];
+    var Sports = ["soccer", "rugby", "tennis"];
+    var School_subjects = ["Art", "History", "Geography"];
+    var Countries = ["Germany", "Ireland", "Egypt"];
+    // -----------------------------------------------------------------
+    //                           My Variables
+    // -----------------------------------------------------------------
+    var randomCategorie;
+    var randomword;
+    //var text;
+
+    // -----------------------------------------------------------------
+    //                         Generates the keyboard
+    // -----------------------------------------------------------------
     for (var i = 0; i < KeyBoard.length; i++) {
         document.getElementById("kb").innerHTML += "<button>" + KeyBoard[i] + "</button>";
         $("button").css({
@@ -132,24 +143,28 @@ var randomword;
         });
     }
     $("button").mouseover(function () {
-        $(this).css({"background-color": "orangered",
-                    "width": "65px",
-                    "height": "60px",
-                    "border-radius": "200%"});
-        
+        $(this).css({
+            "background-color": "orangered",
+            "width": "65px",
+            "height": "60px",
+            "border-radius": "200%"
+        });
+
     });
 
     $("button").mouseout(function () {
-        $(this).css({"background-color": "grey",
-        "width": "55px",
-        "height": "50px",
-        "border-radius": "0px"});
-        
+        $(this).css({
+            "background-color": "grey",
+            "width": "55px",
+            "height": "50px",
+            "border-radius": "0px"
+        });
+
     });
 
-// -----------------------------------------------------------------
-//                      Generates a random word
-// -----------------------------------------------------------------
+    // -----------------------------------------------------------------
+    //                      Generates a random word
+    // -----------------------------------------------------------------
 
     randomCategorie = Categories[Math.floor(Math.random() * Categories.length)];
     document.getElementById("Category").innerHTML += randomCategorie;
@@ -171,52 +186,56 @@ var randomword;
     }
 
     var score = 0;
-// -----------------------------------------------------------------
-//                      Game Logic
-// -----------------------------------------------------------------
-    $.each(randomword.split(''), function(i, char){
-        $('#answer').append($('<span class="letter" letter="' + char +'"></span>'));
+    // -----------------------------------------------------------------
+    //                      Game Logic
+    // -----------------------------------------------------------------
+    $.each(randomword.split(''), function (_i, char) {
+        $('#answer').append($('<span class="letter" letter="' + char + '"></span>'));
         $('.letter').css("font-size", "40px", "font-weight", "900");
-      });
+    });
 
-                $('button').click(function(){
-                var switcher = $('#answer [letter = ' + $(this).text() + ']').each(function(){
-                  $(this).text($(this).attr('letter'));
-                  console.log("letter = "+ letterLeft);
-                //   $(this).css({"background-color": "green"});
-                }).length;
-          
-                $(this).removeClass('button').unbind('click');
-                if (switcher > 0 ){
-                  $(this).addClass("Y");
-                  var letterLeft = $(".letter:empty").length;
-                  console.log("letter Left " + letterLeft);
-                  if (letterLeft <= 0){
-                    //checkResult();
-                    console.log("WINNER")
-                    win += 1;
-                    // $('#win').text("Win: " + win);
-                    // console.log("score " + score);
-                  }
-                }
-                else{
-                  $(this).addClass("X");
-                  score += 1;
-                  console.log("score " + score);
-                  var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
-                  $('#pic').children("img").hide();
-                  $('#pic').append(myImg);
-                  if (score >= 10){
-                      console.log("LOOSER");
-                    // gameLoose();
-                    // $('#answer').text("Word was: " + randomWord);
-                    loose += 1;
-                    //$('#loose').text("Loose: " + loose);
-                  }
-                }
-              });
+    $('button').click(function () {
+        var charCount = $('#answer [letter = ' + $(this).text() + ']').each(function () {
+            $(this).text($(this).attr('letter'));
+        }).length;
+
+        $(this).removeClass('button').unbind('click');
+        if (charCount > 0) {
+            $(this).addClass("Y");
+            var letterLeft = $(".letter:empty").length;
+            console.log("Correct letter");
+            console.log("letter Left " + letterLeft);
+            if (letterLeft <= 0) {
+                console.log("WINNER")
+                win += 1;
             }
+        }
+        else {
+            $(this).addClass("X");
+            score += 1;
+            console.log("score " + score);
+            var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
+            $('#pic').children("img").hide();
+            $('#pic').append(myImg);
+            if (score >= 10) {
+                console.log("LOOSER");
+                // $('#answer').text("Word was: " + randomWord);
+                loose += 1;
+            }
+        }
+    });
+}
 
+
+    // function changeButtonOnCorrect()
+    // {
+
+    // }
+
+    // function changeButtonOnWrong()
+    // {
+
+    // }
 // -----------------------------------------------------------------
 //                           TO DO
 // -----------------------------------------------------------------
