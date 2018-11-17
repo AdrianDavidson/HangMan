@@ -175,7 +175,7 @@ function startGame() {
 
     document.getElementById("words").innerHTML += randomword;
     for (i = 0; i < randomword.length; i++) {
-        document.getElementById("dash").innerHTML += " __ ";
+        // document.getElementById("dash").innerHTML += " __ ";
     }
 
     var score = 0;
@@ -183,62 +183,57 @@ function startGame() {
     //                      Game Logic
     // -----------------------------------------------------------------
 
-    var currentword = randomword.split('');
+    // var currentword = randomword.split('');
 
-    $.each(currentword, function(index, value) { 
-        //alert(index + ': ' + value);
-      });
+    // $.each(currentword, function(index, value) { 
+    //     alert(index + ': ' + value);
 
-      $('button').click(function () {
-            var charCount = $('#answer [letter = ' + $(this).text() + ']').each(function () {
-                $(this).text($(this).attr('letter'));
-            }).length;
+    //     if(KeyBoard[i] == currentword.value){
+    //         console.log("YAY");
 
-            $(this).removeClass('button').unbind('click');
-
-            if(currentword == charCount){
-                alert("YAY");
-              }
-        });
-      
-
-    // $.each(randomword.split(''), function (_i, char) {
-    //     $('#answer').append($('<span class="letter" letter="' + char + '"></span>'));
-    //     $('.letter').css("font-size", "40px", "font-weight", "900");
-    // });
-
-    // $('button').click(function () {
-    //     var charCount = $('#answer [letter = ' + $(this).text() + ']').each(function () {
-    //         $(this).text($(this).attr('letter'));
-    //     }).length;
-
-    //     // REMEMBER:
-    //     // REPLACE DASH WITH ACTUAL CORRECT WORD
-    //     $(this).removeClass('button').unbind('click');
-    //     if (charCount > 0) {
-    //         $(this).addClass("Y");
-    //         var letterLeft = $(".letter:empty").length;
-    //         console.log("Correct letter was chosen");
-    //         console.log("letter Left " + letterLeft);
-    //         if (letterLeft <= 0) {
-    //             console.log("WINNER")
-    //             win += 1;
-    //         }
     //     }
-    //     else {
-    //         $(this).addClass("X");
-    //         score += 1;
-    //         console.log("score " + score);
-    //         var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
-    //         $('#pic').children("img").hide();
-    //         $('#pic').append(myImg);
-    //         if (score >= 10) {
-    //             console.log("LOOSER");
-    //             // $('#answer').text("Word was: " + randomWord);
-    //             loose += 1;
-    //         }
-    //     }
-    // });
+    //   });
+
+
+    
+// I SPLIT RANDOMWORD AND APPEND EACH CAHARCTER TO CLASS 'LETTER'
+    $.each(randomword.split(''), function (_i, char) {
+        $('#answer').append($('<span class="letter" letter="' + char + '"></span>'));
+        //$('.letter').css("font-size", "40px", "font-weight", "900");
+    });
+
+// ON BUTTIN CLICK I GET THE LENGTH OF THE RANDOM WORD
+    $('button').click(function () {
+        var charCount = $('#answer [letter = ' + $(this).text() + ']').each(function () {
+            $(this).text($(this).attr('letter'));
+        }).length;
+
+// IF BUTTON IS CLCIKED I REMOVE ITS FUNCTIONALITY (UNCLICKABLE NOW)
+        $(this).removeClass('button').unbind('click');
+        if (charCount > 0) {
+
+            var letterLeft = $(".letter:empty").length;
+            console.log("Correct letter was chosen");
+            document.getElementById("dash").innerHTML += KeyBoard[i];
+            console.log("letter Left " + letterLeft);
+            if (letterLeft <= 0) {
+                console.log("WINNER")
+                win += 1;
+            }
+        }
+        else {
+            score += 1;
+            console.log("score " + score);
+            var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
+            $('#pic').children("img").hide();
+            $('#pic').append(myImg);
+            if (score >= 10) {
+                console.log("LOOSER");
+                // $('#answer').text("Word was: " + randomWord);
+                loose += 1;
+            }
+        }
+    });
 }
 
 
