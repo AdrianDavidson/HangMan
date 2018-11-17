@@ -213,6 +213,7 @@ function startGame() {
         if (charCount > 0) {
 
             var letterLeft = $(".letter:empty").length;
+            
             console.log("Correct letter was chosen");
             document.getElementById("dash").innerHTML += KeyBoard[i];
             console.log("letter Left " + letterLeft);
