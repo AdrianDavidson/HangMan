@@ -1,3 +1,87 @@
+// -----------------------------------------------------------------
+//                           Log in & Sign in
+// -----------------------------------------------------------------
+
+// +++++++++++++++++++ Log in & Signup form +++++++++++++++++++
+
+$('#container').prepend(`<div id = "LogIn_signIn">
+                            <h1> Welcome to hangman </h1>
+                            <h4> Login if you dare </h4>
+
+                            <form id="register-form"> 
+                            <input id="name" type="text" placeholder="Name" value=""/>
+                            <input id="pw" type="password" placeholder="Password" value=""/>
+                            <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
+                            </form>
+
+                            <form id="login-form"> 
+                            <input id="userName" type="text" placeholder="Enter Username" value=""/>
+                            <input id="userPw" type="password" placeholder="Enter Password" value=""/>
+                            <input id="login_btn" type="submit" value="Login"/>
+                            </form>
+                            </div>
+                            <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
+
+// +++++++++++++++++++ added css using jquery +++++++++++++++++++
+
+$("#container").css({
+    "backgroundColor": "white",
+    "width": "100%",
+    "height": "100%",
+    "position":"absolute",
+    "display": "inline-block",
+    "text-align": "center"});
+
+    $("#loginimage").css({
+        "margin-left": "65%",
+        "margin-top": "25%",});
+
+    $("#LogIn_signIn").css({
+    "left": "50%",
+    "top": "30%",
+    "position": "absolute",
+    "-webkit-transform": "translate3d(-50%, -50%, 0)",
+    "-moz-transform": "translate3d(-50%, -50%, 0)",
+    "font-family": "'Roboto Slab', serif",
+    "font-size": "30px",
+    "transform": "translate3d(-50%, -50%, 0)"})
+
+// +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
+
+// Name and Password from the register-form
+var nm = document.getElementById('name');
+var pw = document.getElementById('pw');
+
+// storing input from register-form
+function store() {
+    localStorage.setItem('name', nm.value);
+    localStorage.setItem('pw', pw.value);
+}
+$(function () {
+    $('#login_btn').click(function (e) {
+        e.preventDefault();
+        
+       // stored data from the register-form
+    var storedName = localStorage.getItem('name');
+    var storedPw = localStorage.getItem('pw');
+
+    // entered data from the login-form
+    var userName = document.getElementById('userName');
+    var userPw = document.getElementById('userPw');
+
+        // check if stored data from register-form is equal to data from login form
+        
+        if(userName.value == storedName && userPw.value == storedPw) {
+            alert('You are loged in.');
+            $("#container").fadeOut(1000);
+            console.log("here");
+        }else {
+            alert('ERROR.');
+        }
+        document.getElementById("welcome").innerHTML += storedName;
+    });
+});
+
 // // -----------------------------------------------------------------
 // //                           My JQuery divs
 // // -----------------------------------------------------------------
@@ -11,98 +95,10 @@ $('#parent').append(`<div id = "words">
                     
                     <div id = "dash"></div>
                     <div id="kb"></div>
-                    <div id = "pic"></div>`);
+                    <div id = "pic"></div>
+                    <input id="logout"type="submit" value="Logout" />`);
 
 startGame();
-// -----------------------------------------------------------------
-//                           Log in & Sign in
-// -----------------------------------------------------------------
-
-// +++++++++++++++++++ Log in & Signup form +++++++++++++++++++
-
-// $('#container').prepend(`<div id = "LogIn_signIn">
-//                             <h1> Welcome to hangman </h1>
-//                             <h4> Login if you dare </h4>
-
-//                             <form id="register-form"> 
-//                             <input id="name" type="text" placeholder="Name" value=""/>
-//                             <input id="pw" type="password" placeholder="Password" value=""/>
-//                             <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
-//                             </form>
-
-//                             <form id="login-form"> 
-//                             <input id="userName" type="text" placeholder="Enter Username" value=""/>
-//                             <input id="userPw" type="password" placeholder="Enter Password" value=""/>
-//                             <input id="login_btn" type="submit" value="Login"/>
-//                             </form>
-//                             </div>
-//                             <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
-
-// // +++++++++++++++++++ added css using jquery +++++++++++++++++++
-
-// $("#container").css({
-//     "backgroundColor": "white",
-//     "width": "100%",
-//     "height": "100%",
-//     "position":"absolute",
-//     "display": "inline-block",
-//     "text-align": "center"});
-
-//     $("#loginimage").css({
-//         "margin-left": "65%",
-//         "margin-top": "25%",});
-
-//     $("#LogIn_signIn").css({
-//     "left": "50%",
-//     "top": "30%",
-//     "position": "absolute",
-//     "-webkit-transform": "translate3d(-50%, -50%, 0)",
-//     "-moz-transform": "translate3d(-50%, -50%, 0)",
-//     "font-family": "'Roboto Slab', serif",
-//     "font-size": "30px",
-//     "transform": "translate3d(-50%, -50%, 0)"})
-
-// // +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
-
-// // Name and Password from the register-form
-// var nm = document.getElementById('name');
-// var pw = document.getElementById('pw');
-// var namesArr = [];
-// var pwarray =[];
-// // storing input from register-form
-// function store() {
-//     // localStorage.setItem('name', nm.value);  //can use localstorage too
-//     // localStorage.setItem('pw', pw.value);  
-// namesArr.push('name', nm.value); //Add the text 'item1' to nameArr
-// localStorage.setItem('names', JSON.stringify(namesArr)); 
-
-// pwarray.push('pw', pw.value); //Add the text 'item1' to nameArr
-// localStorage.setItem('pws', JSON.stringify(pwarray));
-// }
-// $(function () {
-//     $('#login_btn').click(function (e) {
-//         e.preventDefault();
-//         var storedName = JSON.parse(localStorage.getItem("names"));  
-//         var storedPw = JSON.parse(localStorage.getItem("pws"));  
-//         // var storedName = sessionStorage.getItem('name');
-//         // var storedPw = sessionStorage.getItem('pw');
-
-//         // entered data from the login-form
-//         var userName = document.getElementById('userName');
-//         var userPw = document.getElementById('userPw');
-//         // console.log(names);
-
-//         // check if stored data from register-form is equal to data from login form
-//         if (userName.value == storedName && userPw.value == storedPw) {
-//             alert('You are loged in.');
-//             $("#container").fadeOut(1000);
-//             console.log("here");
-//         } else {
-//             alert('Username and password not valid. Please try again.');
-//         }
-//         document.getElementById("welcome").innerHTML += storedName;
-//     });
-// });
 
 var win = 0;
 var loose = 0;
@@ -175,29 +171,16 @@ function startGame() {
 
     document.getElementById("words").innerHTML += randomword;
     for (i = 0; i < randomword.length; i++) {
-        // document.getElementById("dash").innerHTML += " __ ";
     }
-
-    var score = 0;
+    randomword = randomword.toUpperCase()
+ 
     // -----------------------------------------------------------------
     //                      Game Logic
     // -----------------------------------------------------------------
-
-    // var currentword = randomword.split('');
-
-    // $.each(currentword, function(index, value) { 
-    //     alert(index + ': ' + value);
-
-    //     if(KeyBoard[i] == currentword.value){
-    //         console.log("YAY");
-
-    //     }
-    //   });
-
-
+    var score = 0;
     
 // I SPLIT RANDOMWORD AND APPEND EACH CAHARCTER TO CLASS 'LETTER'
-    $.each(randomword.split(''), function (_i, char) {
+    $.each(randomword.split(''), function (i, char) {
         $('#answer').append($('<span class="letter" letter="' + char + '"></span>'));
         //$('.letter').css("font-size", "40px", "font-weight", "900");
     });
@@ -208,18 +191,24 @@ function startGame() {
             $(this).text($(this).attr('letter'));
         }).length;
 
+        console.log(KeyBoard[i]);
+
 // IF BUTTON IS CLCIKED I REMOVE ITS FUNCTIONALITY (UNCLICKABLE NOW)
-        $(this).removeClass('button').unbind('click');
+        $(this).removeClass('button').unbind('click').css({
+            "background-color": "red"
+        });
         if (charCount > 0) {
 
             var letterLeft = $(".letter:empty").length;
             
-            console.log("Correct letter was chosen");
+            console.log("Correct letter was chosen" + KeyBoard[i]);
             document.getElementById("dash").innerHTML += KeyBoard[i];
             console.log("letter Left " + letterLeft);
             if (letterLeft <= 0) {
                 console.log("WINNER")
                 win += 1;
+                winnerScreen();
+                // document.getElementById("welcome").innerHTML += win;
             }
         }
         else {
@@ -230,31 +219,70 @@ function startGame() {
             $('#pic').append(myImg);
             if (score >= 10) {
                 console.log("LOOSER");
+                looserScreen();
                 // $('#answer').text("Word was: " + randomWord);
                 loose += 1;
             }
         }
     });
 }
+ function winnerScreen()
+ {
+    $('#WinnerScreen').prepend(`<h1>Congratulations! You win </h1>
+    <h3>Do you wish to test your skills again?</h3>
+    <input id="btn" type="button" value="button" />
 
+    <div id = "winImg"><img class="theImg" src="https://cdn.pixabay.com/photo/2017/01/31/19/15/cartoon-2026571_960_720.png" style = width:400px height 400px/>
+    </div>`)
 
-    // function changeButtonOnCorrect()
-    // {
+    $("#WinnerScreen").css({
+   "backgroundColor": "lightgreen",
+   "width": "100%",
+   "height": "100%",
+   "position":"absolute",
+   "display": "inline-block",
+   "font-family": "'Permanent Marker', cursive",
+   "text-align": "center"});
 
-    // }
+       $("#winImg").css({
+       "margin-left": "70%",
+       "margin-top": "15%"});
+ }
+ function looserScreen()
+ {
+     $('#LooserScreen').prepend(`<h1>Unlucky! </h1>
+     <h3>Do you wish to test your skills again?</h3>
+     <input id="btn" type="button" value="button" />
 
-    // function changeButtonOnWrong()
-    // {
+     <div id = "looseimg"><img class="theImg" src="http://img2.wikia.nocookie.net/__cb20130207191137/scribblenauts/images/thumb/0/01/Hangman.png/133px-Hangman.png
+     "/>
 
-    // }
-// -----------------------------------------------------------------
-//                           TO DO
-// -----------------------------------------------------------------
+     <img class="theImg" src="https://vignette.wikia.nocookie.net/kancolle/images/2/28/R.i.p..png/revision/latest?cb=20160820142228
+     "/>
+     </div>`)
 
-// MAKE SURE MORE THAN ONE USER CAN BE STORED 
-// ADD GAME LOGIC
-    // if button guess wrong generate new image untill game over
-    // if correct display correct letter where __ is atm
-// IMPLEMENT GAME OVER 
-// KEEP TRACK OF SCORE 
-// ADD LOG OUT BUTTON
+     $("#LooserScreen").css({
+    "backgroundColor": "crimson",
+    "width": "100%",
+    "height": "100%",
+    "position":"absolute",
+    "display": "inline-block",
+    "font-family": "'Permanent Marker', cursive",
+    "text-align": "center"});
+
+        $("#looseimg").css({
+        "margin-left": "65%",
+        "margin-top": "10%"});
+
+    // https://cdn.pixabay.com/photo/2017/01/31/19/15/cartoon-2026571_960_720.png
+
+    // $('#btn').click(function() {
+    //     startGame();
+    // });
+ }
+
+//  TO DO
+// 1) ON BUTTON CLICK, REPLAY GAME AT END Screen
+// 2) TRACK WINS/LOSSES
+// 3) CREATE MULTIPLE USER SIGN IN 
+// 4) DISPLAY CORRECT LETTERS AT DASHES
