@@ -4,7 +4,21 @@
 
 // +++++++++++++++++++ Log in & Signup form +++++++++++++++++++
 
-$('#container').prepend(`<div id = "LogIn_signIn">
+$('#container').prepend(`  <div id="login_div" class="main-div">
+<h3>Firebase Web login Example</h3>
+<input type="email" placeholder="Email..." id="email_field" />
+<input type="password" placeholder="Password..." id="password_field" />
+
+<button onclick="login()">Login to Account</button>
+</div>
+
+<div id="user_div" class="loggedin-div">
+<h3>Welcome User</h3>
+<p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
+<button onclick="logout()">Logout</button>
+</div>`)
+// DO NOT DELETE
+{/* <div id = "LogIn_signIn">
                             <h1> Welcome to hangman </h1>
                             <h4> Login if you dare </h4>
 
@@ -20,8 +34,7 @@ $('#container').prepend(`<div id = "LogIn_signIn">
                             <input id="login_btn" type="submit" value="Login"/>
                             </form>
                             </div>
-                            <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
-
+                            <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div> */}
 // +++++++++++++++++++ added css using jquery +++++++++++++++++++
 
 $("#container").css({
@@ -46,41 +59,89 @@ $("#container").css({
     "font-size": "30px",
     "transform": "translate3d(-50%, -50%, 0)"})
 
+
+
 // +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
 
-// Name and Password from the register-form
-var nm = document.getElementById('name');
-var pw = document.getElementById('pw');
+// // Name and Password from the register-form
+// var nm = document.getElementById('name');
+// var pw = document.getElementById('pw');
 
-// storing input from register-form
-function store() {
-    localStorage.setItem('name', nm.value);
-    localStorage.setItem('pw', pw.value);
-}
-$(function () {
-    $('#login_btn').click(function (e) {
-        e.preventDefault();
+// // storing input from register-form
+// function store() {
+//     localStorage.setItem('name', nm.value);
+//     localStorage.setItem('pw', pw.value);
+// }
+// $(function () {
+//     $('#login_btn').click(function (e) {
+//         e.preventDefault();
         
-       // stored data from the register-form
-    var storedName = localStorage.getItem('name');
-    var storedPw = localStorage.getItem('pw');
+//        // stored data from the register-form
+//     var storedName = localStorage.getItem('name');
+//     var storedPw = localStorage.getItem('pw');
 
-    // entered data from the login-form
-    var userName = document.getElementById('userName');
-    var userPw = document.getElementById('userPw');
+//     // entered data from the login-form
+//     var userName = document.getElementById('userName');
+//     var userPw = document.getElementById('userPw');
 
-        // check if stored data from register-form is equal to data from login form
+//         // check if stored data from register-form is equal to data from login form
         
-        if(userName.value == storedName && userPw.value == storedPw) {
-            alert('You are loged in.');
-            $("#container").fadeOut(1000);
-            console.log("here");
-        }else {
-            alert('ERROR.');
-        }
-        document.getElementById("welcome").innerHTML += storedName;
+//         if(userName.value == storedName && userPw.value == storedPw) {
+//             alert('You are loged in.');
+//             $("#container").fadeOut(1000);
+//             console.log("here");
+//         }else {
+//             alert('ERROR.');
+//         }
+//         document.getElementById("welcome").innerHTML += storedName;
+//     });
+// });
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+  
+      document.getElementById("user_div").style.display = "block";
+      document.getElementById("login_div").style.display = "none";
+  
+      var user = firebase.auth().currentUser;
+  
+      if(user != null){
+  
+        var email_id = user.email;
+        document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
+  
+      }
+  
+    } else {
+      // No user is signed in.
+  
+      document.getElementById("user_div").style.display = "none";
+      document.getElementById("login_div").style.display = "block";
+  
+    }
+  });
+  
+  function login(){
+  
+    var userEmail = document.getElementById("email_field").value;
+    var userPass = document.getElementById("password_field").value;
+  
+    firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+  
+      window.alert("Error : " + errorMessage);
+  
+      // ...
     });
-});
+  
+  }
+  
+  function logout(){
+    firebase.auth().signOut();
+  }
+  
 
 // // -----------------------------------------------------------------
 // //                           My JQuery divs
