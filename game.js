@@ -4,37 +4,72 @@
 
 // +++++++++++++++++++ Log in & Signup form +++++++++++++++++++
 
-$('#container').prepend(`  <div id="login_div" class="main-div">
-<h3>Firebase Web login Example</h3>
-<input type="email" placeholder="Email..." id="email_field" />
-<input type="password" placeholder="Password..." id="password_field" />
+$('#container').prepend(`<div id = "LogIn_signIn">
+                        <h1> Welcome to hangman </h1>
+                        <h4> Login if you dare </h4>
 
-<button onclick="login()">Login to Account</button>
-</div>
-
-<div id="user_div" class="loggedin-div">
-<h3>Welcome User</h3>
-<p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
-<button onclick="logout()">Logout</button>
-</div>`)
-// DO NOT DELETE
-{/* <div id = "LogIn_signIn">
-                            <h1> Welcome to hangman </h1>
-                            <h4> Login if you dare </h4>
-
-                            <form id="register-form"> 
-                            <input id="name" type="text" placeholder="Name" value=""/>
-                            <input id="pw" type="password" placeholder="Password" value=""/>
+                        <form id="register-form"> 
+                            <input id="regName" type="text" placeholder="Name" value=""/>
+                            <input id="RegPW" type="password" placeholder="Password" value=""/>
                             <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
-                            </form>
+                        </form>
 
-                            <form id="login-form"> 
-                            <input id="userName" type="text" placeholder="Enter Username" value=""/>
-                            <input id="userPw" type="password" placeholder="Enter Password" value=""/>
+                        <form id="login-form"> 
+                            <input id="usern" type="text" placeholder="Enter Username" value=""/>
+                            <input id="pword" type="password" placeholder="Enter Password" value=""/>
                             <input id="login_btn" type="submit" value="Login"/>
-                            </form>
-                            </div>
-                            <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div> */}
+                            
+                        </form>
+                        </div>
+                        <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
+
+// +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
+
+// Loop through Array of Objects
+var objPeople = [
+	{ // Object @ 0 index
+		username: "test",
+		password: "123"
+	},
+	{ // Object @ 1 index
+		username: "matt",
+		password: "academy"
+	},
+	{ // Object @ 2 index
+		username: "chris",
+		password: "forever"
+	}
+
+]
+
+$(function () {
+    $('#login_btn').click(function (e) {
+        e.preventDefault();
+        var username = document.getElementById('usern').value
+	var password = document.getElementById('pword').value
+
+	for(var i = 0; i < objPeople.length; i++) {
+		// check is user input matches username and password of a current index of the objPeople array
+		if(username == objPeople[i].username && password == objPeople[i].password) {
+			alert(username + " is logged in!!!")
+            // stop the function if this is found to be true
+            $("#container").fadeOut(1000);
+            document.getElementById("welcome").innerHTML += username;
+            return
+            
+        }
+        
+	}
+	
+    });
+});
+
+function store() {
+    objPeople.push(username = regName.value, password = RegPW.value);
+    document.getElementById("demo").innerHTML = fruits;
+}
+
+
 // +++++++++++++++++++ added css using jquery +++++++++++++++++++
 
 $("#container").css({
@@ -58,11 +93,6 @@ $("#container").css({
     "font-family": "'Roboto Slab', serif",
     "font-size": "30px",
     "transform": "translate3d(-50%, -50%, 0)"})
-
-
-
-// +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
-
 // // Name and Password from the register-form
 // var nm = document.getElementById('name');
 // var pw = document.getElementById('pw');
@@ -96,53 +126,6 @@ $("#container").css({
 //         document.getElementById("welcome").innerHTML += storedName;
 //     });
 // });
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-  
-      document.getElementById("user_div").style.display = "block";
-      document.getElementById("login_div").style.display = "none";
-  
-      var user = firebase.auth().currentUser;
-  
-      if(user != null){
-  
-        var email_id = user.email;
-        document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
-  
-      }
-  
-    } else {
-      // No user is signed in.
-  
-      document.getElementById("user_div").style.display = "none";
-      document.getElementById("login_div").style.display = "block";
-  
-    }
-  });
-  
-  function login(){
-  
-    var userEmail = document.getElementById("email_field").value;
-    var userPass = document.getElementById("password_field").value;
-  
-    firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-  
-      window.alert("Error : " + errorMessage);
-  
-      // ...
-    });
-  
-  }
-  
-  function logout(){
-    firebase.auth().signOut();
-  }
-  
-
 // // -----------------------------------------------------------------
 // //                           My JQuery divs
 // // -----------------------------------------------------------------
