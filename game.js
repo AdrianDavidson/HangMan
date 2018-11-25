@@ -65,8 +65,13 @@ $(function () {
 });
 
 function store() {
-    objPeople.push(username = regName.value, password = RegPW.value);
-    document.getElementById("demo").innerHTML = fruits;
+    // for(var i = 0; i < objPeople.length; i++) {
+        objPeople.push(regName.value, RegPW.value);
+        //document.getElementById("demo").innerHTML = fruits;
+        //numArray.push(num);
+        return false;
+    // }
+    
 }
 
 
