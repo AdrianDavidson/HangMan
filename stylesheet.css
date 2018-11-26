@@ -24,7 +24,7 @@
     margin-top: 25%;
     margin: auto;
     text-align: center;
-    width: 17%;
+    width: 100%;
     font-family: 'Roboto Slab', serif;
     font-size: 20px;
 }
@@ -64,12 +64,35 @@ button{
 #lost{
     margin-top: 60%;
 }
-/* #btn{
-    margin-top: 20%;
-    margin: auto;
-    text-align: center;
-    width: 15%;
-    height: 30%;
-    font-family: 'Gloria Hallelujah', cursive;
-    font-size: 20px;
-} */
+
+@media only screen and (max-width: 900px) {
+    #kb {
+        width: 80%;
+        float: right;
+    }
+    #words{
+        width: 20%;
+    }
+    #category{
+        width: 100%;
+    }
+    #loginimage{
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #kb {
+        width: 80%;
+        float: right;
+    }
+    #words{
+        width: 20%;
+    }
+    #category{
+        width: 100%;
+    }
+    #loginimage{
+        margin: auto;
+    }
+}

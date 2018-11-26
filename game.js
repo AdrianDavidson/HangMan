@@ -11,7 +11,7 @@ $('#container').prepend(`<div id = "LogIn_signIn">
                         <form id="register-form"> 
                             <input id="regName" type="text" placeholder="Name" value=""/>
                             <input id="RegPW" type="password" placeholder="Password" value=""/>
-                            <input id="rgstr_btn" type="submit" value="Sign Up" onClick="store()"/> 
+                            <input id="rgstr_btn" type="submit" value="Sign Up"/> 
                         </form>
 
                         <form id="login-form"> 
@@ -23,7 +23,7 @@ $('#container').prepend(`<div id = "LogIn_signIn">
                         </div>
                         <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
 
-// // +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
+// +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
 var username;
 var password;
 var win = 0;
@@ -34,20 +34,20 @@ var objPeople = [
     { // Object @ 0 index
         username: "test",
         password: "123",
-        win:"",
-        Loose:""
+        win: "",
+        Loose: ""
     },
     { // Object @ 1 index
         username: "a",
         password: "1",
-        win:"",
-        Loose:""
+        win: "",
+        Loose: ""
     },
     { // Object @ 2 index
         username: "b",
         password: "1",
-        win:"",
-        Loose:""
+        win: "",
+        Loose: ""
     }
 
 ]
@@ -56,31 +56,36 @@ $(function () {
     $('#login_btn').click(function (e) {
         e.preventDefault();
         username = document.getElementById('usern').value
-         password = document.getElementById('pword').value
-         
-         for(var i = 0; i < objPeople.length; i++) {
+        password = document.getElementById('pword').value
+
+        for (var i = 0; i < objPeople.length; i++) {
             // check is user input matches username and password of a current index of the objPeople array
-            if(username == objPeople[i].username && password == objPeople[i].password) {
+            if (username == objPeople[i].username && password == objPeople[i].password) {
                 alert(username + " is logged in!!!")
                 $("#container").fadeOut(1500);
-                 //document.getElementById("welcome").innerHTML += username;
+                //document.getElementById("welcome").innerHTML += username;
                 // stop the function if this is found to be true
                 return
             }
         }
-            alert("FALSE");
+        alert("Wrong Password and Username combination. Please try again");
     });
 });
 
-// function store() {
+$(function () {
+    $('#rgstr_btn').click(function (e) {
+        e.preventDefault();
 
-//        var usrnme = document.getElementById("regName").value;
-//        var pass = document.getElementById("RegPW").value;
-
-//        objPeople.push(usrnme + pass);
-
-// }
-
+        var usrnme = document.getElementById("regName").value;
+        var pass = document.getElementById("RegPW").value;
+        objPeople.push({
+            username: usrnme,
+            password: pass,
+            win: 0,
+            Loose: 0
+        });
+    });
+});
 
 // +++++++++++++++++++ added css using jquery +++++++++++++++++++
 
@@ -90,7 +95,7 @@ $("#container").css({
     "height": "100%",
     "position": "absolute",
     "display": "inline-block",
-    "text-align": "center"
+    "text-align": "center",
 });
 
 $("#loginimage").css({
@@ -154,7 +159,7 @@ function startGame() {
     //                         Generates the keyboard
     // -----------------------------------------------------------------
     for (var i = 0; i < KeyBoard.length; i++) {
-        document.getElementById("kb").innerHTML += "<button>" + KeyBoard[i] + "</button>";
+        document.getElementById("kb").innerHTML += "<button class= rbutton>" + KeyBoard[i] + "</button>";
         $("button").css({
             width: '55px',
             margin: '10px',
@@ -217,39 +222,26 @@ function startGame() {
             $(this).text($(this).attr('letter'));
         }).length;
 
-        console.log(KeyBoard[i]);
-
-        // IF BUTTON IS CLCIKED I REMOVE ITS FUNCTIONALITY (UNCLICKABLE NOW)
-        $(this).removeClass('button').unbind('click').css({
-            "background-color": "red"
-        });
         if (charCount > 0) {
-
+            $(this).attr("disabled", "disabled");
             var letterLeft = $(".letter:empty").length;
-
-            console.log("Correct letter was chosen" + KeyBoard[i]);
-            // document.getElementById("dash").innerHTML += KeyBoard[i];
-            console.log("letter Left " + letterLeft);
             if (letterLeft <= 0) {
-                console.log("WINNER")
-                // win +=1;
                 document.getElementById("won").innerHTML = win++;
-                alert(win);
                 winnerScreen();
-
             }
         }
         else {
+            $(this).removeClass('button').unbind('click').css({
+                "opacity": "0.1"
+            });
+            $(this).attr("disabled", "disabled");
             score += 1;
-            console.log("score " + score);
             var myImg = "<img src=" + "imgs/hangman-" + score + ".png" + ">";
             $('#pic').children("img").hide();
             $('#pic').append(myImg);
             if (score >= 10) {
-                console.log("LOOSER");
                 document.getElementById("lost").innerHTML = loose++;
                 looserScreen();
-                
             }
         }
     });
@@ -303,16 +295,9 @@ function looserScreen() {
         "margin-left": "65%",
         "margin-top": "10%"
     });
-
-    // https://cdn.pixabay.com/photo/2017/01/31/19/15/cartoon-2026571_960_720.png
-
-    // $('#btn').click(function() {
-    //     startGame();
-    // });
 }
 
 function reload() {
-    alert("CLICKED");
     emptyContent();
     startGame();
 }
@@ -324,13 +309,7 @@ function emptyContent() {
     $('#LooserScreen').empty();
 }
 
-function logout(){
+function logout() {
     $('#parent').empty();
     $('#container').show();
 }
-
- //  TO DO
-// 1) ON BUTTON CLICK, REPLAY GAME AT END Screen
-// 2) TRACK WINS/LOSSES
-// 3) CREATE MULTIPLE USER SIGN IN 
-// 4) DISPLAY CORRECT LETTERS AT DASHES
