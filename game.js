@@ -56,49 +56,28 @@ $(function () {
     $('#login_btn').click(function (e) {
         e.preventDefault();
         username = document.getElementById('usern').value
-        password = document.getElementById('pword').value
-
-        for (var i = 0; i < objPeople.length; i++) {
+         password = document.getElementById('pword').value
+         
+         for(var i = 0; i < objPeople.length; i++) {
             // check is user input matches username and password of a current index of the objPeople array
-            if (username == objPeople[i].username && password == objPeople[i].password) {
-                alert(username + " is logged in!")
+            if(username == objPeople[i].username && password == objPeople[i].password) {
+                alert(username + " is logged in!!!")
+                $("#container").fadeOut(1500);
+                 //document.getElementById("welcome").innerHTML += username;
                 // stop the function if this is found to be true
-                $("#container").fadeOut(1000);
-                //document.getElementById("welcome").innerHTML += username;
-                return
-
-            }
-            else {
-                alert("Username or Password details are incorrect");
                 return
             }
-
         }
-
+            alert("FALSE");
     });
 });
 
 // function store() {
-//     // for(var i = 0; i < objPeople.length; i++) {
-//        // objPeople.push(regName.value, RegPW.value);
-//         //document.getElementById("demo").innerHTML = fruits;
-//         //numArray.push(num);
-//        // return false;
 
 //        var usrnme = document.getElementById("regName").value;
 //        var pass = document.getElementById("RegPW").value;
 
 //        objPeople.push(usrnme + pass);
-
-//        Results.map((obj) => {
-//         obj.Active = 'false';
-//         return obj;
-//     })
-
-//        //objPeople.push(usrnme);
-
-
-//     // }
 
 // }
 
