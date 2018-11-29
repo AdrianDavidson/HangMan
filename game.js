@@ -24,7 +24,7 @@ $('#container').prepend(`<div id = "LogIn_signIn">
                         <div id = "loginimage"><img class="theImg" src="./imgs/cover1.png" style="width:500px; height:250px;"/></div>`)
 
 // +++++++++++++++++++ Log in & Signup form Logic +++++++++++++++++++
-var username;
+var username = username;
 var password;
 var win = 0;
 var loose = 0;
@@ -51,6 +51,7 @@ var objPeople = [
     }
 
 ]
+alert("Name: " + JSON.stringify(objPeople.username));
 
 $(function () {
     $('#login_btn').click(function (e) {
@@ -69,6 +70,11 @@ $(function () {
             }
         }
         alert("Wrong Password and Username combination. Please try again");
+
+        // if(username == usrnme && password ==pass){
+        //     alert("Welcome back mr" + username);
+
+        // }
     });
 });
 
@@ -81,8 +87,8 @@ $(function () {
         objPeople.push({
             username: usrnme,
             password: pass,
-            win: 0,
-            Loose: 0
+            win: win,
+            Loose: loose
         });
     });
 });
@@ -146,9 +152,9 @@ function startGame() {
         "Z", "X", "C", "V", "B", "N", "M"];
 
     var Categories = ["Sport", "School Subject", "Country"];
-    var Sports = ["soccer", "rugby", "tennis"];
-    var School_subjects = ["Art", "History", "Geography"];
-    var Countries = ["Germany", "Ireland", "Egypt"];
+    var Sports = ["Soccer", "Rugby", "Tennis", "Dodgeball", "Athletics", "Swimming", "Running", "Baseball", "Pingpong", "Hurling"];
+    var School_subjects = ["Art", "History", "Geography", "English", "Maths", "Biology", "Chemistry", "Physics", "Woodwork"];
+    var Countries = ["Germany", "Ireland", "Egypt","Uganda", "Jamaica", "America", "Iceland", "Greenland", "England", "France"];
     // -----------------------------------------------------------------
     //                           My Variables
     // -----------------------------------------------------------------
@@ -211,6 +217,7 @@ function startGame() {
     // -----------------------------------------------------------------
     var score = 0;
 
+
     // I SPLIT RANDOMWORD AND APPEND EACH CAHARCTER TO CLASS 'LETTER'
     $.each(randomword.split(''), function (i, char) {
         $('#dash').append($('<span class="letter" letter="' + char + '"></span>'));
@@ -249,7 +256,7 @@ function startGame() {
 function winnerScreen() {
     $('#WinnerScreen').prepend(`<h1>Congratulations! You win </h1>
     <h3>Do you wish to test your skills again?</h3>
-    <input id="btn" type="button" value="button" onclick= "reload()" />
+    <input id="btn" type="button" value="Go" onclick= "reload()" />
 
     <div id = "winImg"><img class="theImg" src="https://cdn.pixabay.com/photo/2017/01/31/19/15/cartoon-2026571_960_720.png" style = width:400px height 400px/>
     </div>`)
@@ -272,7 +279,7 @@ function winnerScreen() {
 function looserScreen() {
     $('#LooserScreen').prepend(`<h1>Unlucky! </h1>
      <h3>Do you wish to test your skills again?</h3>
-     <input id="btn" type="button" value="button" onclick= "reload()" />
+     <input id="btn" type="button" value="Go" onclick= "reload()" />
 
      <div id = "looseimg"><img class="theImg" src="http://img2.wikia.nocookie.net/__cb20130207191137/scribblenauts/images/thumb/0/01/Hangman.png/133px-Hangman.png
      "/>
@@ -312,4 +319,5 @@ function emptyContent() {
 function logout() {
     $('#parent').empty();
     $('#container').show();
+    startGame();
 }
