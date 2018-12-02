@@ -29,7 +29,7 @@ var password;
 var win = 0;
 var loose = 0;
 
-// Loop through Array of Objects
+// TEST DATA FOR LOGGING IN TO TEST 
 var objPeople = [
     { // Object @ 0 index
         username: "test",
@@ -42,16 +42,10 @@ var objPeople = [
         password: "1",
         win: "",
         Loose: ""
-    },
-    { // Object @ 2 index
-        username: "b",
-        password: "1",
-        win: "",
-        Loose: ""
     }
 
 ]
-alert("Name: " + JSON.stringify(objPeople.username));
+//alert("Name: " + JSON.stringify(objPeople.username));
 
 $(function () {
     $('#login_btn').click(function (e) {
@@ -64,17 +58,13 @@ $(function () {
             if (username == objPeople[i].username && password == objPeople[i].password) {
                 alert(username + " is logged in!!!")
                 $("#container").fadeOut(1500);
-                //document.getElementById("welcome").innerHTML += username;
-                // stop the function if this is found to be true
+                // if(objPeople[username]===username){
+                //     return win;
+                // }
                 return
             }
         }
         alert("Wrong Password and Username combination. Please try again");
-
-        // if(username == usrnme && password ==pass){
-        //     alert("Welcome back mr" + username);
-
-        // }
     });
 });
 
@@ -234,6 +224,10 @@ function startGame() {
             var letterLeft = $(".letter:empty").length;
             if (letterLeft <= 0) {
                 document.getElementById("won").innerHTML = win++;
+                
+                objPeople.push({
+                    win:win
+                });
                 winnerScreen();
             }
         }
@@ -248,6 +242,9 @@ function startGame() {
             $('#pic').append(myImg);
             if (score >= 10) {
                 document.getElementById("lost").innerHTML = loose++;
+                objPeople.push({
+                    loose: loose
+                });
                 looserScreen();
             }
         }
