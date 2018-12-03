@@ -58,10 +58,11 @@ $(function () {
             if (username == objPeople[i].username && password == objPeople[i].password) {
                 alert(username + " is logged in!!!")
                 $("#container").fadeOut(1500);
-                // if(objPeople[username]===username){
-                //     return win;
-                // }
+                alert("user score = " + win);
+                win = win;
+                loose = loose;
                 return
+                
             }
         }
         alert("Wrong Password and Username combination. Please try again");
@@ -76,9 +77,7 @@ $(function () {
         var pass = document.getElementById("RegPW").value;
         objPeople.push({
             username: usrnme,
-            password: pass,
-            win: win,
-            Loose: loose
+            password: pass
         });
     });
 });
@@ -302,6 +301,10 @@ function looserScreen() {
 }
 
 function reload() {
+    objPeople.push({
+        win:win,
+        loose:loose
+    });
     emptyContent();
     startGame();
 }
@@ -314,7 +317,10 @@ function emptyContent() {
 }
 
 function logout() {
+    
     $('#parent').empty();
     $('#container').show();
+
+    
     startGame();
 }
