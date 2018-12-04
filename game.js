@@ -56,11 +56,11 @@ $(function () {
         for (var i = 0; i < objPeople.length; i++) {
             // check is user input matches username and password of a current index of the objPeople array
             if (username == objPeople[i].username && password == objPeople[i].password) {
-                alert(username + " is logged in!!!")
+                alert(username + " is logged in!!!");
                 $("#container").fadeOut(1500);
-                alert("user score = " + win);
                 win = win;
                 loose = loose;
+                username = username;
                 return
                 
             }
@@ -75,6 +75,18 @@ $(function () {
 
         var usrnme = document.getElementById("regName").value;
         var pass = document.getElementById("RegPW").value;
+        for (var i = 0; i < objPeople.length; i++) {
+        if (usrnme == objPeople[i].username) {
+            alert("username already exisits try again");
+            win = win;
+            loose = loose;
+            username = username;
+            return
+            
+        }
+    }
+    alert(usrnme + " is signed up, thank you.");
+
         objPeople.push({
             username: usrnme,
             password: pass
@@ -196,7 +208,10 @@ function startGame() {
         randomword = Countries[Math.floor(Math.random() * Countries.length)];
     }
 
-    document.getElementById("words").innerHTML += randomword;
+    // DELETE THIS
+    // *********************************************************
+     document.getElementById("words").innerHTML += randomword;
+
     for (i = 0; i < randomword.length; i++) {
     }
     randomword = randomword.toUpperCase()
@@ -320,7 +335,5 @@ function logout() {
     
     $('#parent').empty();
     $('#container').show();
-
-    
     startGame();
 }
